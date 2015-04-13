@@ -58,10 +58,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddFilesToGitRepository.cs" />
-    <Compile Include="CopyFilesToDirectory.cs" />
+    <Compile Include="CopyAndAddFilesToGitRepository.cs" />
+    <Compile Include="Infrastructure\Extensions.cs" />
+    <Compile Include="Infrastructure\ConsoleLogger.cs" />
     <Compile Include="DownloadArtifactsFromGitRepository.cs" />
+    <Compile Include="GetAllFilesFromGitRepository.cs" />
     <Compile Include="Git.cs" />
+    <Compile Include="Infrastructure\ILogger.cs" />
     <Compile Include="MoveFilesToDirectory.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="ProvideTemporaryDirectory.cs" />

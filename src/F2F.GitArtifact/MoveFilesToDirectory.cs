@@ -8,28 +8,53 @@ namespace F2F.GitArtifact
 {
 	public class MoveFilesToDirectory
 	{
-		private readonly IFileProvider _fileProvider;
+		private readonly ILogger _logger;
 		private readonly string _directory;
 
-		public MoveFilesToDirectory(IFileProvider fileProvider, string directory)
+		public MoveFilesToDirectory(ILogger logger, string directory)
 		{
-			_fileProvider = fileProvider;
+			_logger = logger;
 			_directory = directory;
 		}
 
-		public void MoveFiles()
+		public bool MoveFiles(IFileProvider fileProvider)
 		{
-			if (!Directory.Exists(_directory)) Directory.CreateDirectory(_directory);
+			var isSuccessful = true;
 
-			foreach (var file in _fileProvider.GetFiles())
+			try
 			{
-				var sourcePath = file.AbsolutePath;
-				var targetPath = Path.Combine(_directory, file.RelativePath);
+				if (!Directory.Exists(_directory)) Directory.CreateDirectory(_directory);
 
-				if (File.Exists(targetPath)) File.Delete(targetPath);
+				foreach (var file in fileProvider.GetFiles())
+				{
+					var sourcePath = file.AbsolutePath;
+					var targetPath = Path.Combine(_directory, file.RelativePath);
 
-				File.Move(sourcePath, targetPath);
+					if (File.Exists(sourcePath))
+					{
+						var targetDirectory = Path.GetDirectoryName(targetPath);
+						if (!Directory.Exists(targetDirectory)) Directory.CreateDirectory(targetDirectory);
+
+						if (File.Exists(targetPath)) File.Delete(targetPath);
+
+						File.Move(sourcePath, targetPath);
+					}
+					else
+					{
+						Directory.CreateDirectory(targetPath);
+					}
+				}
+
+				isSuccessful = true;
 			}
+			catch (Exception e)
+			{
+				_logger.Error("Could not move files to '{0}': {1}", _directory, e.Message);
+
+				isSuccessful = false;
+			}
+
+			return isSuccessful;
 		}
 	}
 }

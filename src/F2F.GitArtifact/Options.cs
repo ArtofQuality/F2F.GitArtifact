@@ -12,14 +12,14 @@ namespace F2F.GitArtifact
 		[Option('d', "download", DefaultValue = false, Required = false)]
 		public bool Download { get; set; }
 
-		[Option('d', "directory", Required = false)]
+		[Option('p', "directory", Required = false)]
 		public string Directory { get; set; }
 
 		[Option('f', "filter", Required = false)]
 		public string Filter { get; set; }
 
-		[Option('r', "remote", Required = true)]
-		public string Remote { get; set; }
+		[Option('r', "repository", Required = true)]
+		public string RepositoryUrl { get; set; }
 
 		[Option('b', "branch", Required = true)]
 		public string Branch { get; set; }

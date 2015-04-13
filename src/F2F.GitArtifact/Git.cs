@@ -11,22 +11,20 @@ namespace F2F.GitArtifact
 	{
 		private const string GIT_EXE = "git.exe";
 
+		private readonly ILogger _logger;
 		private readonly string _directory;
 		private readonly string _gitPath;
-		private readonly Action<string> _outputLogger;
-		private readonly Action<string> _errorLogger;
 
-		public Git(string directory)
-			: this(directory, m => Console.WriteLine(m), m => Console.Error.WriteLine(m))
+		public Git(ILogger logger, string directory)
+			: this(logger, directory, GIT_EXE)
 		{
 		}
 
-		public Git(string directory, Action<string> outputLogger, Action<string> errorLogger)
+		public Git(ILogger logger, string directory, string gitPath)
 		{
+			_logger = logger;
 			_directory = directory;
-			_gitPath = Path.Combine("", GIT_EXE);
-			_outputLogger = outputLogger;
-			_errorLogger = errorLogger;
+			_gitPath = gitPath;
 		}
 
 		public string Directory
@@ -34,7 +32,7 @@ namespace F2F.GitArtifact
 			get { return _directory; }
 		}
 
-		public int Execute(string arguments)
+		private int Execute(string arguments)
 		{
 			var ps = new ProcessStartInfo()
 			{
@@ -65,7 +63,8 @@ namespace F2F.GitArtifact
 				.FromEventPattern<DataReceivedEventArgs>(p, "OutputDataReceived")
 				.Select(e => e.EventArgs.Data)
 				.DistinctUntilChanged()
-				.Do(m => _outputLogger(m))
+				.Where(m => m != null)
+				.Do(m => _logger.Info(m))
 				.Subscribe();
 		}
 
@@ -75,7 +74,8 @@ namespace F2F.GitArtifact
 				.FromEventPattern<DataReceivedEventArgs>(p, "ErrorDataReceived")
 				.Select(e => e.EventArgs.Data)
 				.DistinctUntilChanged()
-				.Do(m => _errorLogger(m))
+				.Where(m => m != null)
+				.Do(m => _logger.Error(m))
 				.Subscribe();
 		}
 

@@ -24,11 +24,15 @@ namespace F2F.GitArtifact
 
 		public void Initialize()
 		{
-			_git.Init();
-			_git.Config("core.autocrlf false");
+			_git.Init()
+				.MustBeSuccessful("could not initialize git repository");
+			_git.Config("core.autocrlf false")
+				.MustBeSuccessful("could not set core.autocrlf to false");
 
-			if (!String.IsNullOrEmpty(_userName)) _git.Config(String.Format("user.name \"{0}\"", _userName));
-			if (!String.IsNullOrEmpty(_userEmail)) _git.Config(String.Format("user.email \"{0}\"", _userEmail));
+			if (!String.IsNullOrEmpty(_userName)) _git.Config(String.Format("user.name \"{0}\"", _userName))
+				.MustBeSuccessful("could not set user.name to '{0}'", _userName);
+			if (!String.IsNullOrEmpty(_userEmail)) _git.Config(String.Format("user.email \"{0}\"", _userEmail))
+				.MustBeSuccessful("could not set user.email to '{0}'", _userEmail);
 		}
 	}
 }

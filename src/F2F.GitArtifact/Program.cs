@@ -44,10 +44,11 @@ namespace F2F.GitArtifact
 
 			try
 			{
+				var logger = new ConsoleLogger();
 				var filter = new FilterParser().Parse(o.Filter);
 
-				if (o.Upload) new UploadArtifactsToGitRepository(o.Directory, filter, o.Remote, o.Branch).Upload();
-				else if (o.Download) new DownloadArtifactsFromGitRepository(o.Directory, filter, o.Remote, o.Branch).Download();
+				if (o.Upload) new UploadArtifactsToGitRepository(logger, o.Directory, filter, o.RepositoryUrl, o.Branch).Upload();
+				else if (o.Download) new DownloadArtifactsFromGitRepository(logger, o.Directory, filter, o.RepositoryUrl, o.Branch).Download();
 				else throw new ArgumentException("You have to specify -u or -d!");
 
 				isSuccessful = true;
