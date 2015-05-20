@@ -32,8 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="F2F.Testing.Xunit.FakeItEasy">
-      <HintPath>..\packages\F2F.Testing.Xunit.FakeItEasy.1.0.10\lib\net40\F2F.Testing.Xunit.FakeItEasy.dll</HintPath>
+    <Reference Include="F2F.Testing.Xunit, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\F2F.Testing.Xunit.1.0.11\lib\net40\F2F.Testing.Xunit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="F2F.Testing.Xunit.FakeItEasy, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\F2F.Testing.Xunit.FakeItEasy.1.2.1.0\lib\net40\F2F.Testing.Xunit.FakeItEasy.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FakeItEasy, Version=1.25.2.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <HintPath>..\packages\FakeItEasy.1.25.2\lib\net40\FakeItEasy.dll</HintPath>
@@ -45,16 +50,16 @@
     <Reference Include="FluentAssertions.Core">
       <HintPath>..\packages\FluentAssertions.3.3.0\lib\net40\FluentAssertions.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture, Version=3.30.2.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoFixture.3.30.2\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    <Reference Include="Ploeh.AutoFixture, Version=3.30.4.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoFixture.3.30.4\lib\net40\Ploeh.AutoFixture.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture.AutoFakeItEasy, Version=3.30.2.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoFixture.AutoFakeItEasy.3.30.2\lib\net40\Ploeh.AutoFixture.AutoFakeItEasy.dll</HintPath>
+    <Reference Include="Ploeh.AutoFixture.AutoFakeItEasy, Version=3.30.4.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoFixture.AutoFakeItEasy.3.30.4\lib\net40\Ploeh.AutoFixture.AutoFakeItEasy.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture.Xunit, Version=3.30.2.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoFixture.Xunit.3.30.2\lib\net40\Ploeh.AutoFixture.Xunit.dll</HintPath>
+    <Reference Include="Ploeh.AutoFixture.Xunit, Version=3.30.4.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoFixture.Xunit.3.30.4\lib\net40\Ploeh.AutoFixture.Xunit.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

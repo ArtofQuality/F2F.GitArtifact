@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using F2F.FileFilter;
-using F2F.Testing.Sandbox;
+using F2F.Sandbox;
 using F2F.Testing.Xunit;
 using F2F.Testing.Xunit.FakeItEasy;
 using F2F.Testing.Xunit.Sandbox;

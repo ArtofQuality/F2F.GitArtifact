@@ -6,25 +6,28 @@ namespace F2F.GitArtifact
 {
 	public class Options
 	{
-		[Option('u', "upload", DefaultValue = false, Required = false)]
+		[Option("upload", DefaultValue = false)]
 		public bool Upload { get; set; }
 
-		[Option('d', "download", DefaultValue = false, Required = false)]
+		[Option("download", DefaultValue = false)]
 		public bool Download { get; set; }
 
-		[Option('p', "directory", Required = false)]
-		public string Directory { get; set; }
+		[Option('d', "directory")]
+		public string TargetDirectory { get; set; }
 
-		[Option('f', "filter", Required = false)]
+		[Option('t', "temp")]
+		public string TempDirectory { get; set; }
+
+		[Option('f', "filter")]
 		public string Filter { get; set; }
 
-		[Option('r', "repository", Required = true)]
-		public string RepositoryUrl { get; set; }
+		[Option('r', "repository")]
+		public string Repository { get; set; }
 
-		[Option('b', "branch", Required = true)]
+		[Option('b', "branch")]
 		public string Branch { get; set; }
 
-		[Option('h', "help", DefaultValue = false, Required = false)]
+		[Option('h', "help", DefaultValue = false)]
 		public bool Help { get; set; }
 
 		[ParserState]
@@ -38,9 +41,14 @@ namespace F2F.GitArtifact
 			sb.AppendLine(String.Format("Version: {0}", GetType().Assembly.GetName().Version));
 			sb.AppendLine();
 			sb.AppendLine("Parameter:");
-			sb.AppendLine(" -u, --upload\tUpload artifacts");
-			sb.AppendLine(" -d, --download\tDownload artifacts");
-			sb.AppendLine(" -h, --help\tShow this help.");
+			sb.AppendLine(" --upload\t\tUpload artifacts");
+			sb.AppendLine(" --download\t\tDownload artifacts");
+			sb.AppendLine(" -d, --directory\tPath to target directory");
+			sb.AppendLine(" -t, --temp\t\tPath to temp directory");
+			sb.AppendLine(" -f, --filter\t\tFilter for files which have to be uploaded");
+			sb.AppendLine(" -r, --repository\tGit repository url");
+			sb.AppendLine(" -b, --branch\t\tGit branch name");
+			sb.AppendLine(" -h, --help\t\tShow this help.");
 
 			return sb.ToString();
 		}

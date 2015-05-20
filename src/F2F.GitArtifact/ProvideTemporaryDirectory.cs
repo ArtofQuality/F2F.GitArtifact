@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace F2F.GitArtifact
 {
@@ -10,12 +12,14 @@ namespace F2F.GitArtifact
 		private readonly string _directory;
 
 		public ProvideTemporaryDirectory()
-			: this(Path.GetTempPath())
+			: this(null)
 		{
 		}
 
 		public ProvideTemporaryDirectory(string rootDirectory)
 		{
+			rootDirectory = !String.IsNullOrEmpty(rootDirectory) ? rootDirectory : Path.GetTempPath();
+
 			_directory = Path.Combine(rootDirectory, Guid.NewGuid().ToString());
 
 			System.IO.Directory.CreateDirectory(_directory);

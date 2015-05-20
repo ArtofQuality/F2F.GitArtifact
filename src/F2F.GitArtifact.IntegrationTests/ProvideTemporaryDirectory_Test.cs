@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using F2F.Sandbox;
 using F2F.Testing.Xunit;
 using F2F.Testing.Xunit.FakeItEasy;
@@ -13,24 +12,27 @@ using Xunit;
 
 namespace F2F.GitArtifact.IntegrationTests
 {
-	public class InitializeGitRepository_Test : TestFixture
+	public class ProvideTemporaryDirectory_Test : TestFixture
 	{
-		public InitializeGitRepository_Test()
+		public ProvideTemporaryDirectory_Test()
 		{
 			Register(new AutoMockFeature());
 			Register(new FileSandboxFeature(new ResourceFileLocator(GetType())));
 		}
 
 		[Fact]
-		public void Initialize_ShouldCreateGitFolder()
+		public void Dispose_WithInitializedGitRepository_ShouldNotThrow()
 		{
 			var logger = this.Fixture().Create<ILogger>();
-			var git = new Git(logger, this.Sandbox().Directory);
-			var sut = new InitializeGitRepository(git);
+			var sut = new ProvideTemporaryDirectory(this.Sandbox().Directory);
+			var git = new Git(logger, sut.Directory);
+			var init = new InitializeGitRepository(git);
 
-			sut.Initialize();
+			init.Initialize();
 
-			Directory.Exists(Path.Combine(this.Sandbox().Directory, ".git")).Should().BeTrue();
+			Action a = () => sut.Dispose();
+
+			a.ShouldNotThrow();
 		}
 	}
 }

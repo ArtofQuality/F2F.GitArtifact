@@ -67,10 +67,10 @@
     <Compile Include="Infrastructure\ILogger.cs" />
     <Compile Include="MoveFilesToDirectory.cs" />
     <Compile Include="Options.cs" />
-    <Compile Include="ProvideTemporaryDirectory.cs" />
     <Compile Include="InitializeGitRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvideTemporaryDirectory.cs" />
     <Compile Include="UploadArtifactsToGitRepository.cs" />
   </ItemGroup>
   <ItemGroup>

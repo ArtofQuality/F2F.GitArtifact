@@ -13,21 +13,20 @@ namespace F2F.GitArtifact
 		{
 			var result = -1;
 
-			//var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			//var remoteUrl = "ssh://git@stash.aoq.local:7999/aoq/f2f.git";
-			//var branch = "MOEP";
-
 			try
 			{
 				var options = new Options();
 
-				if (Parser.Default.ParseArguments(args, options) && !options.Help)
+				if (Parser.Default.ParseArguments(args, options))
 				{
-					result = Run(options) ? 0 : 1;
-				}
-				else
-				{
-					Console.WriteLine(options.GetUsage());
+					if (!options.Help)
+					{
+						result = Run(options) ? 0 : 1;
+					}
+					else
+					{
+						Console.WriteLine(options.GetUsage());
+					}
 				}
 			}
 			catch (Exception e)
@@ -47,15 +46,15 @@ namespace F2F.GitArtifact
 				var logger = new ConsoleLogger();
 				var filter = new FilterParser().Parse(o.Filter);
 
-				if (o.Upload) new UploadArtifactsToGitRepository(logger, o.Directory, filter, o.RepositoryUrl, o.Branch).Upload();
-				else if (o.Download) new DownloadArtifactsFromGitRepository(logger, o.Directory, filter, o.RepositoryUrl, o.Branch).Download();
+				if (o.Upload) new UploadArtifactsToGitRepository(logger, filter, o.TargetDirectory, o.TempDirectory, o.Repository, o.Branch).Upload();
+				else if (o.Download) new DownloadArtifactsFromGitRepository(logger, filter, o.TargetDirectory, o.TempDirectory, o.Repository, o.Branch).Download();
 				else throw new ArgumentException("You have to specify -u or -d!");
 
 				isSuccessful = true;
 			}
 			catch (Exception e)
 			{
-				Console.Error.WriteLine(e);
+				Console.Error.WriteLine(e.Message);
 			}
 
 			return isSuccessful;
